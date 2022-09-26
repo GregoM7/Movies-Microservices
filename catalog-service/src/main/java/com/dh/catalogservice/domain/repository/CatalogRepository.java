@@ -1,16 +1,13 @@
-package com.dh.seriesservice.repository;
+package com.dh.catalogservice.domain.repository;
 
-
-import com.dh.seriesservice.models.Series;
+import com.dh.catalogservice.domain.model.dto.CatalogWS;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface SeriesRepository extends MongoRepository<Series, Integer> {
-    Optional<Series> findByName(String name);
+public interface CatalogRepository extends MongoRepository<CatalogWS, Integer> {
+
     Page findByGenre(String genre, PageRequest pageRequest);
 }

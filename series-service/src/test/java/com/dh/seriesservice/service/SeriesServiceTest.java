@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SeriesServiceTest {
 
     @Autowired
-    private SeriesService seriesservice;
+    private SeriesService seriesService;
 
 
 
@@ -21,6 +21,6 @@ class SeriesServiceTest {
         Series serie1 = new Series();
         serie1.setName("Friends");
         serie1.setGenre("Comedy");
-        Assertions.assertTrue(seriesservice.create(serie1).getName().equals("Friends"));
+        Assertions.assertTrue(seriesService.create(serie1).getName().equals("Friends"));
     }
 }

@@ -1,18 +1,22 @@
 package com.dh.seriesservice.models;
 
+import java.util.List;
+
 public class Seasons {
     private Integer id;
     private Integer seasonNum;
-    private Chapter chapter;
-
-    public Seasons(Integer id, Integer seasonNum, Chapter chapter) {
-        this.id = id;
-        this.seasonNum = seasonNum;
-        this.chapter = chapter;
-    }
+    private String genre;
+    private List<Chapter> chapters;
 
     public Seasons() {
-        //No Args Constructor
+        //no-args constructor
+    }
+
+    public Seasons(Integer id, Integer seasonNum, String genre, List<Chapter> chapters) {
+        this.id = id;
+        this.seasonNum = seasonNum;
+        this.genre = genre;
+        this.chapters = chapters;
     }
 
     public Integer getId() {
@@ -31,11 +35,19 @@ public class Seasons {
         this.seasonNum = seasonNum;
     }
 
-    public Chapter getChapter() {
-        return chapter;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setChapter(Chapter chapter) {
-        this.chapter = chapter;
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public List<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters = chapters;
     }
 }

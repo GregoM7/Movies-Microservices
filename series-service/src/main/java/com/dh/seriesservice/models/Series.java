@@ -3,23 +3,25 @@ package com.dh.seriesservice.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document
 public class Series {
     @Id
     private Integer id;
     private String name;
     private String genre;
-    private Seasons seasons;
+    private List<Seasons> seasons;
 
-    public Series(Integer id, String name, String genre, Seasons seasons) {
+    public Series() {
+        //no-args constructor
+    }
+
+    public Series(Integer id, String name, String genre, List<Seasons> seasons) {
         this.id = id;
         this.name = name;
         this.genre = genre;
         this.seasons = seasons;
-    }
-
-    public Series() {
-        //No Args Constructor
     }
 
     public Integer getId() {
@@ -46,11 +48,11 @@ public class Series {
         this.genre = genre;
     }
 
-    public Seasons getSeasons() {
+    public List<Seasons> getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(Seasons seasons) {
+    public void setSeasons(List<Seasons> seasons) {
         this.seasons = seasons;
     }
 }

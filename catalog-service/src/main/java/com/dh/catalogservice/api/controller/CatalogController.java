@@ -2,6 +2,8 @@ package com.dh.catalogservice.api.controller;
 
 import com.dh.catalogservice.api.service.CatalogService;
 import com.dh.catalogservice.domain.model.dto.CatalogWS;
+import com.dh.catalogservice.domain.model.dto.MovieWS;
+import com.dh.catalogservice.domain.model.dto.SerieWS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,25 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
-@RestController
-@RequestMapping("/catalogs")
-public class CatalogController {
 
-	@Value("${server.port}")
-	private String port;
+public interface CatalogController {
 
-	private CatalogService catalogService;
+	public ResponseEntity<List<MovieWS>> listMovies(int from, int to);
 
-	@Autowired
-	public CatalogController(CatalogService catalogService) {
-		this.catalogService = catalogService;
-	}
+	public ResponseEntity<MovieWS> findMovieByName(String name);
 
-	@GetMapping("/{genre}")
-	ResponseEntity<CatalogWS> getCatalogByGenre(@PathVariable String genre, HttpServletResponse response) {
-		CatalogWS catalog = catalogService.findCatalogByGenre(genre);
-		response.addHeader("port",port);
-		return catalog == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(catalog);
-	}
+	public ResponseEntity<List<MovieWS>> findMoviesByGenre(String genre,int from, int to) ;
+
+	public ResponseEntity<List<SerieWS>> listSeries(int from, int to) ;
+
+	public ResponseEntity<SerieWS> findSerieByName(String name) ;
+
+	public ResponseEntity<List<SerieWS>> findSerieByGenre(String genre,int from, int to) ;
+
 }
