@@ -1,13 +1,18 @@
-eureka:
-    client:
-      service-url:
-        defaultZone: http://localhost:8761/eureka
-        
+global-message: Configuration server is alive!
+
 management:
-  info:
-    env:
+  endpoint:
+    info:
       enabled: true
   endpoints:
     web:
       exposure:
         include: health,info,loggers,mappings
+  info:
+    env:
+      enabled: true
+      
+spring:
+  zipkin:
+    baseUrl: http://zipkin:9411
+    enabled: true
