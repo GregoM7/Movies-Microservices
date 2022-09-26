@@ -1,9 +1,11 @@
 package com.dh.movieservice.api.controller;
 
 import com.dh.movieservice.api.service.MovieService;
+import com.dh.movieservice.api.service.impl.MovieServiceImpl;
 import com.dh.movieservice.domain.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,26 +14,52 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
-public class MovieController {
+public class MovieController implements CRUDcontroller<Movie>{
 
-	@Value("${server.port}")
-	private String port;
-
-	private MovieService movieService;
+	private MovieServiceImpl movieService;
 
 	@Autowired
-	public MovieController(MovieService movieService) {
-		this.movieService = movieService;
+	public MovieController(MovieServiceImpl movieService){
+		this.movieService=movieService;
 	}
 
-	@GetMapping("/{genre}")
-	public ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable String genre, HttpServletResponse response) {
-		response.addHeader("port",port);
-		return ResponseEntity.ok().body(movieService.getListByGenre(genre));
+
+	@Override
+	@PostMapping("/create")
+	public ResponseEntity<Movie> create(@RequestBody Movie object)  {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(movieService.create(object));
 	}
 
-	@PostMapping
-	public ResponseEntity<Movie> saveMovie(@RequestBody Movie movie) {
-		return ResponseEntity.ok().body(movieService.save(movie));
+	@Override
+	@PutMapping("/update/{name}")
+	public ResponseEntity<Movie> up(@RequestBody Movie object,@PathVariable String name)  {
+		return ResponseEntity.ok(movieService.update(object,name));
 	}
+
+	@Override
+	@GetMapping("/list")
+	public ResponseEntity<List<Movie>> li(@RequestParam("from") int from, @RequestParam("to") int to)  {
+		return ResponseEntity.ok(movieService.list(from,to));
+	}
+
+	@Override
+	@DeleteMapping("/delete/{name}")
+	public ResponseEntity<Movie> deleteName(@PathVariable String name){
+		return ResponseEntity.ok(movieService.deleteName(name));
+	}
+
+	@Override
+	@GetMapping("/findByName/{name}")
+	public ResponseEntity<Movie> findByName(@PathVariable String name) {
+		return ResponseEntity.ok(movieService.findByName(name));
+	}
+
+	@Override
+	@GetMapping("/findByGenre/{genre}")
+	public ResponseEntity<List<Movie>> findByGenre(@PathVariable String genre,@RequestParam("from") int from,@RequestParam("to") int to)  {
+		return ResponseEntity.ok(movieService.findByGenre(genre, from, to));
+	}
+
+
+
 }
