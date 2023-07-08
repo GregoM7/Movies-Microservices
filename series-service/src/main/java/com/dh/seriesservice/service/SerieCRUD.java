@@ -12,10 +12,6 @@ public interface SerieCRUD<T> {
     public T create(T object);
     public T update(Series object, String name);
     public List<T> list(int from, int to);
-
-    @GetMapping("/list")
-    ResponseEntity<List<Series>> li(@RequestParam("from") int from, @RequestParam("to") int to);
-
     public T deleteName(String name);
     public T findByName(String name);
 

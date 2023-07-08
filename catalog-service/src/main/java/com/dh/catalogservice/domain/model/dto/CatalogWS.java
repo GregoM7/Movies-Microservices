@@ -18,7 +18,8 @@ public class CatalogWS {
 	public CatalogWS() {
 	}
 
-	public CatalogWS(String genre, MovieWS movies) {
+	public CatalogWS(Integer id, String genre, MovieWS movies) {
+		this.id = id;
 		this.genre = genre;
 		this.movies = movies;
 	}

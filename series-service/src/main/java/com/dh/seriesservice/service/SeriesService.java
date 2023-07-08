@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -59,7 +60,6 @@ public class SeriesService implements SerieCRUD<Series>{
 
         return page.toList();
     }
-
     @Override
     public Series deleteName(String name) {
         Series serie=findByName(name);

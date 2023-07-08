@@ -1,7 +1,7 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-service:8761/eureka
+      defaultZone: http://localhost:8761/eureka #Para probar Local. http://eureka-service:8761/eureka para contenedor.
   instance:
     lease-renewal-interval-in-seconds: 10
 
